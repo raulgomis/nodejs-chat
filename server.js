@@ -105,7 +105,8 @@ io.sockets.on("connection", function(socket) {
             // Remove the client from the global list
             clients.splice(clients.indexOf(socket.nick), 1);
             // Let all the remaining clients know of the disconnect
-            io.sockets.emit("user-left", socket.nick);
+            //io.sockets.emit("user-left", socket.nick);
+			socket.broadcast.emit("user-left", socket.nick);
         }
     });
 
