@@ -39,7 +39,8 @@ io.configure(function () {
 	  , 'jsonp-polling'
 	]);*/
 	io.set('transports', [                     // enable all transports (optional if you want flashsocket)
-		'flashsocket'
+		'websocket'
+		, 'flashsocket'
 	  , 'htmlfile'
 	  , 'xhr-polling'
 	  , 'jsonp-polling'
