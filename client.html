@@ -1,0 +1,429 @@
+﻿<!doctype html>
+<html>
+    <head>
+        <title>Chat</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+		
+		
+		
+        <style type="text/css">
+		
+		
+
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	  
+	  
+.panel-left {
+	margin-right: 250px;
+}
+.panel-right {
+	width: 249px;
+	background-color: #f2f2f2;
+	border-left: 1px solid #dddddd;
+	position: absolute;
+	right: 0;
+	top: 37px;
+	height: 2500px;
+}
+.panel-right .panel-title {
+	width: 100%;
+	background-color: #ececec;
+	border-bottom: 1px solid #dddddd;
+}
+.panel-right .panel-title h5 {
+	font-size: 12px;
+	color: #777777;
+	text-shadow: 0 1px 0 #ffffff;
+	padding: 6px 10px 5px;
+    margin: 0;
+}
+.panel-right .panel-content {
+	padding: 10px;
+}
+.chat-content {
+	height: 470px;
+	padding: 15px;
+}
+.chat-messages {
+    background: none repeat scroll 0 0 #FDFDFD;
+    border: 1px solid #DDDDDD;
+    height: 625px;
+    overflow: auto;
+    position: relative;
+}
+.chat-message {
+	padding: 7px 15px;
+	margin: 7px 0 0;
+}
+.chat-message input[type=text] {
+	margin-bottom: 0 !important;
+	width: 100%;
+}
+.chat-message .input-box {
+    display: block;
+    margin-right: 90px;
+}
+.chat-message button {
+	float: right;
+}
+#chat-messages-inner p {
+    padding: 10px;
+    margin: 10px 0;
+}
+#chat-messages-inner p img {
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+    margin-top: 6px;
+}
+#chat-messages-inner .msg-block, #chat-messages-inner p.offline span {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #cccccc;
+    box-shadow: 1px 1px 0 1px rgba(0, 0, 0, 0.05);
+    display: block;
+    margin-left: 40px;
+    padding: 10px;
+    position: relative;
+}
+#chat-messages-inner p.offline span {
+    background: none repeat scroll  0 0 #FFF5F5;
+}
+#chat-messages-inner .time {
+    color: #999999;
+    font-size: 11px;
+    font-style: italic;
+}
+#chat-messages-inner .msg {
+    display: block;
+    margin-top: 10px;
+}
+#chat-messages-inner .msg-block:before {
+	border-right: 7px solid rgba(0,0,0,0.1);
+	border-top: 7px solid transparent;
+	border-bottom: 7px solid transparent;
+	content: "";
+	display: inline-block;
+	left: -7px;
+	position: absolute;
+	top: 11px;
+}
+#chat-messages-inner .msg-block:after {
+	border-right: 6px solid #ffffff;
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	content: "";
+	display: inline-block;
+	left: -6px;
+	position: absolute;
+	top: 12px;
+}
+.chat-users {
+	padding: 0 0 30px;
+}
+.chat-users .contact-list {
+    line-height: 21px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+}
+.chat-users .contact-list li {
+    border-color: #dddddd;
+    border-style: none none solid;
+    border-width: 0 0 1px;
+    padding: 1px;
+    position: relative;
+}
+.chat-users .contact-list li:hover {
+	background-color: #efefef;
+}
+.chat-users .contact-list li a {
+    color: #666666;
+    display: block;
+    padding: 8px 5px;
+}
+.chat-users .contact-list li.online a {
+	font-weight: bold;
+}
+.chat-users .contact-list li.new {
+	background-color: #eaeaea;
+}
+.chat-users .contact-list li.offline {
+	background-color: #EDE0E0;
+}
+.chat-users .contact-list li a img {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+}
+.chat-users .contact-list li .msg-count {
+	padding: 3px 5px;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+}
+	  
+	  
+    
+		
+			#chat { display: none; height: 100%; }
+			/*
+			#chat-messages { height: 90%; overflow-y: scroll; background-color: #eee; }
+			*/
+			
+            /* Global */
+            html, body { height: 100%; }
+            body { font-family: sans-serif; }
+			*/
+            /* Join form */
+            #join-form { padding: 1em; }
+            #nick-input { margin-bottom: 1em; }
+            #nick-error { display: none; color: #d00; }
+			*/
+            /* Chat */
+            #chat { display: none; height: 100%; }
+            #main { width: 80%; height: 100%; float: left; }
+            */
+			/*
+            #message-form { height: 10%; }
+            #message-input { width: 100%; height: 100%; padding: 0 1em; border: none; outline: none; }
+            #users { width: 20%; height: 100%; float: left; background-color: #ddd; }
+            .sender { font-weight: bold; }
+            .system-message { font-style: italic; }
+			*/
+
+        </style>
+    </head>
+
+    <body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="navbar-inner">
+			<div class="container-fluid">
+			  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </a>
+			  <a class="brand" href="#">Chatico!</a>
+			  <div class="nav-collapse collapse">
+				<p class="navbar-text pull-right">
+				  Logged in as <a href="#" class="navbar-link">Username</a>
+				</p>
+				<ul class="nav">
+				  <li class="active"><a href="#">Home</a></li>
+				  <li><a href="#about">About</a></li>
+				  <li><a href="#contact">Contact</a></li>
+				</ul>
+			  </div><!--/.nav-collapse -->
+			</div>
+		  </div>
+		</div>
+
+		<form id="join-form">
+			<label for="nick-input">Choose a nickname:</label><br />
+			<input id="nick-input" />
+			<div id="nick-error">That nickname is already in use, please choose something different.</div>
+		</form>
+				
+<div class="widget-content nopadding">
+	<div class="chat-content panel-left">                   
+	   <div class="chat-messages" id="chat-messages">
+			<div id="chat-messages-inner">
+
+			</div>
+	   </div>									
+	   <div class="chat-message well">
+			<button class="btn btn-success">Send</button>  
+			<span class="input-box">
+				<form id="message-form">
+					<input type="text" name="msg-box" id="message-input">
+				</form>
+			</span>										                  
+	   </div>                   
+	</div>
+	<div class="chat-users panel-right">
+		<div class="panel-title"><h5>Online Users</h5></div>
+		<div class="panel-content nopadding">
+			<ul class="contact-list" id="users">
+			</ul>
+		</div>
+	</div>
+</div>
+	
+
+	
+        <script id="userTemplate" type="text/x-jquery-tmpl">
+			<li id="user-${user}" class="online new">
+				<a href="#"><img alt="" src="http://wbpreview.com/previews/WB0F35928/img/demo/av1.jpg"> <span>${user}</span></a>
+				<span class="msg-count badge badge-info"></span>
+			</li>
+			
+        </script>
+
+        <script id="chatMessageTemplate" type="text/x-jquery-tmpl">
+			<p id="msg-1" class="user-neytiri" style="display: block;">
+			<img src="http://wbpreview.com/previews/WB0F35928/img/demo/av1.jpg" alt="">
+			<span class="msg-block"><strong>${sender}</strong> 
+			<span class="time">- 09:10</span><span class="msg">${message}
+			</span>
+			</span>
+			</p>
+        </script>
+
+        <script id="systemMessageTemplate" type="text/x-jquery-tmpl">
+			<p class="offline system-message" style="display: block;"><span>${message}</span></p>
+        </script>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+
+            $(document).ready(function() {
+
+                // Give focus to the nickname input when the page loads
+                $("#nick-input").focus();
+
+                // Create a connection to the server
+                var socket = io.connect(document.URL);
+
+                /*
+                    Handle submission of the join form, try to join the chat-room
+                */
+                $("#join-form").submit(function(ev) {
+
+                    // Prevent the browser from submitting the form via HTTP
+                    ev.preventDefault();
+
+                    // Check that a nickname has been entered
+                    var nick = $("#nick-input").val();
+                    if (nick) {
+
+                        // Send a request to join the chat-room
+                        socket.emit("join", nick, function(successful, users) {
+                            if (successful) {
+
+                                // Hide the join form and show the main chat interface
+                                $("#join-form").hide();
+                                $("#chat").show();
+
+                                // Display a welcome message
+                                var message = "Welcome, " + nick;
+                                $("#systemMessageTemplate").tmpl({message: message}).appendTo("#chat-messages-inner");
+
+                                // Display the list of connected users on the page
+                                $.each(users, function(i, user) {
+                                    $("#userTemplate").tmpl({user: user}).appendTo("#users");
+                                });
+
+                                // Give focus to the message input so the user can start entering a message
+                                $("#message-input").focus();
+
+
+                                /*
+                                    Send chat messages
+                                    ------------------
+                                */
+                                $("#message-form").submit(function(ev) {
+                                    // Prevent the browser from submitting the form via HTTP
+                                    ev.preventDefault();
+
+                                    // Send the message to the server
+                                    socket.emit("chat", $("#message-input").val());
+
+                                    // Clear the text-box
+                                    $("#message-input").val("").focus();
+									
+									var  inner = $('#chat-messages-inner');
+									$('#chat-messages').animate({ scrollTop: inner.height() },700);
+									
+                                });
+
+
+                                /*
+                                    Handle chat messages
+                                    --------------------
+                                */
+                                socket.on("chat", function(message) {
+
+                                    // Inject the message into the DOM
+                                    $("#chatMessageTemplate").tmpl(message).appendTo("#chat-messages-inner");
+
+                                    // Auto-scroll the message pane
+
+                                    $("#chat-messages-inner").scrollTop($("#chat-messages-inner").prop("scrollHeight") - $("#chat-messages-inner").height());
+									
+									var  inner = $('#chat-messages-inner');
+									$('#chat-messages').animate({ scrollTop: inner.height() },700);
+
+                                });
+
+
+                                /*
+                                    Handle users joining
+                                    --------------------
+                                */
+                                socket.on("user-joined", function(user) {
+
+                                    // Add to the on-page list of users
+                                    $("#userTemplate").tmpl({user: user}).appendTo("#users");
+
+                                    // Display a message in the main chat stream
+                                    var message = user + " joined";
+                                    $("#systemMessageTemplate").tmpl({message: message}).appendTo("#chat-messages-inner");
+
+                                    // Auto-scroll the message pane
+                                    $("#chat-messages-inner").scrollTop($("#chat-messages-inner").prop("scrollHeight") - $("#chat-messages-inner").height());
+									
+									var  inner = $('#chat-messages-inner');
+									$('#chat-messages').animate({ scrollTop: inner.height() },700);
+
+                                });
+
+
+                                /*
+                                    Handle users leaving
+                                    --------------------
+                                */
+                                socket.on("user-left", function(user) {
+
+                                    // Remove from the on-page list of users
+                                    $("#user-" + user).remove();
+
+                                    // Display a message in the main chat stream
+                                    var message = user + " left";
+                                    $("#systemMessageTemplate").tmpl({message: message}).appendTo("#chat-messages-inner");
+
+                                    // Auto-scroll the message pane
+                                    $("#chat-messages-inner").scrollTop($("#chat-messages-inner").prop("scrollHeight") - $("#chat-messages-inner").height());
+									
+									var  inner = $('#chat-messages-inner');
+									$('#chat-messages').animate({ scrollTop: inner.height() },700);
+
+                                });
+
+
+                            // If the request to join was rejected, show an error message
+                            } else {
+                                $("#nick-error").show();
+                            }
+                        });
+                    }
+                });                
+                
+            });
+        </script>
+    </body>
+</html>
